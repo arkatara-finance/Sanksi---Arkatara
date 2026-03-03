@@ -3,167 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanksi & Denda - Arkatara</title>
+    <title>WARNING: Mekanisme Sanksi Arkatara</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Plus+Jakarta+Sans:wght@400;800&display=swap');
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fffaf0;
-            color: #1e293b;
+            background-color: #f0fdf4; /* Hijau pastel segar */
+            background-image: radial-gradient(#d1fae5 2px, transparent 2px);
+            background-size: 30px 30px;
             overflow-x: hidden;
         }
 
-        .edu-card {
+        .pop-card {
             background: white;
-            border-radius: 32px;
-            border: 2px solid #fde68a;
-            box-shadow: 0 10px 30px -5px rgba(245, 158, 11, 0.1);
+            border: 4px solid #064e3b;
+            border-radius: 28px;
+            box-shadow: 12px 12px 0px #064e3b;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .floating {
-            animation: float 4s ease-in-out infinite;
+        .pop-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 18px 18px 0px #064e3b;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+        .edu-float {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.15;
+            animation: floatAnim 6s ease-in-out infinite;
         }
 
-        .step-number {
-            background: #f59e0b;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .highlight-yellow {
+            background: #fef08a;
+            padding: 2px 8px;
+            border-radius: 4px;
             font-weight: 800;
-            font-size: 14px;
-            flex-shrink: 0;
+            border: 2px solid #064e3b;
         }
 
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+        .important-tag {
+            background: #ef4444;
+            color: white;
+            padding: 4px 12px;
+            font-weight: 900;
+            border: 3px solid #064e3b;
+            transform: rotate(-3deg);
+            display: inline-block;
         }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
+<body class="p-4 md:p-10">
 
-    <!-- Latar Belakang Dekoratif -->
-    <div class="fixed top-20 left-10 text-yellow-200 floating opacity-40 z-0">
-        <i class="fas fa-pencil-ruler text-6xl"></i>
-    </div>
-    <div class="fixed bottom-20 right-10 text-orange-200 floating opacity-40 z-0" style="animation-delay: 2s;">
-        <i class="fas fa-graduation-cap text-7xl"></i>
-    </div>
+    <!-- Elemen Pendidikan Melayang -->
+    <i class="fas fa-pencil-alt edu-float text-6xl top-10 left-10 text-green-700"></i>
+    <i class="fas fa-book edu-float text-8xl top-1/2 right-10 text-blue-700" style="animation-delay: 1s;"></i>
+    <i class="fas fa-graduation-cap edu-float text-7xl bottom-10 left-20 text-yellow-700" style="animation-delay: 2s;"></i>
+    <i class="fas fa-ruler edu-float text-6xl top-40 right-1/4 text-red-700" style="animation-delay: 1.5s;"></i>
 
     <div class="max-w-2xl mx-auto relative z-10">
-        <!-- HEADER -->
-        <div class="text-center mb-10">
-            <div class="inline-block p-4 bg-orange-100 rounded-3xl mb-4 rotate-3 shadow-lg shadow-orange-100">
-                <i class="fas fa-gavel text-3xl text-orange-600"></i>
-            </div>
-            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Mekanisme Sanksi</h1>
-            <p class="text-orange-600 font-bold text-xs uppercase tracking-[0.2em] mt-3 underline decoration-wavy">Kabinet Arkatara 2026</p>
+        
+        <!-- HEADER POP -->
+        <div class="text-center mb-16 animate__animated animate__jackInTheBox">
+            <div class="important-tag mb-4 shadow-[4px_4px_0px_#064e3b]">⚠️ BACA INI BIAR GAK KENA DENDA!</div>
+            <h1 class="text-5xl font-bold text-emerald-900 font-['Fredoka']">Mekanisme Sanksi</h1>
+            <p class="text-emerald-600 font-black mt-2 tracking-widest uppercase">Bendahara Kabinet Arkatara 2026</p>
         </div>
 
-        <!-- KALKULATOR DENDA -->
-        <div class="edu-card p-8 mb-10 border-orange-300 relative overflow-hidden bg-gradient-to-br from-orange-50 to-white">
-            <div class="text-center mb-6">
-                <h3 class="font-black text-slate-800 text-lg uppercase mb-2 text-orange-600">🧮 Kalkulator Denda Progresif</h3>
-                <p class="text-slate-500 text-xs font-semibold leading-relaxed px-4">
-                    Masukkan berapa hari kamu terlambat dari deadline untuk simulasi total denda yang harus dibayar.
-                </p>
+        <!-- KALKULATOR POP-UP -->
+        <div class="pop-card p-8 mb-16 bg-white border-4 border-emerald-900 animate__animated animate__fadeInUp">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-16 h-16 bg-yellow-400 border-4 border-emerald-900 rounded-2xl flex items-center justify-center rotate-3 shadow-[6px_6px_0px_#064e3b]">
+                    <i class="fas fa-calculator text-3xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-emerald-900">Kalkulator Denda</h2>
+                    <p class="text-xs font-bold text-emerald-600">Simulasi biaya keterlambatanmu secara LIVE!</p>
+                </div>
             </div>
 
-            <div class="flex flex-col md:flex-row gap-6 items-center">
-                <div class="w-full">
-                    <label class="block text-[10px] font-black text-slate-400 mb-2 uppercase tracking-widest text-center md:text-left italic">Berapa hari kamu telat?</label>
-                    <div class="relative">
-                        <input type="number" id="daysInput" min="0" placeholder="Misal: 5" oninput="calcDenda()" 
-                               class="w-full p-5 rounded-2xl border-2 border-orange-200 focus:border-orange-500 outline-none font-black text-2xl text-center text-orange-600 shadow-inner">
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-black text-emerald-900 mb-3">Masukkan berapa hari kamu <span class="bg-yellow-200 px-1 italic">terlambat:</span></label>
+                    <input type="number" id="inputHari" placeholder="Contoh: 5" oninput="updateDenda()" 
+                           class="w-full p-6 text-4xl font-black rounded-2xl border-4 border-emerald-900 focus:bg-emerald-50 focus:outline-none transition-all shadow-inner">
+                </div>
+
+                <div id="hasilBox" class="bg-emerald-900 p-8 rounded-3xl text-center transition-all duration-300 transform">
+                    <p class="text-emerald-200 text-xs font-black uppercase mb-2 tracking-widest">Total Tagihan Denda:</p>
+                    <h3 id="totalDenda" class="text-5xl font-black text-yellow-400">Rp 0</h3>
+                    <div id="msgStatus" class="mt-4 text-[10px] font-bold text-white opacity-60 uppercase tracking-widest italic">
+                        "Masukkan jumlah hari untuk memulai perhitungan"
                     </div>
                 </div>
-                
-                <div class="w-full bg-orange-600 p-6 rounded-2xl text-center shadow-xl shadow-orange-200 transition-all duration-300" id="resCard">
-                    <p class="text-[10px] font-black text-orange-100 mb-1 uppercase tracking-widest">Total Denda:</p>
-                    <p class="text-3xl font-black text-white" id="totalDenda">Rp 0</p>
-                </div>
             </div>
-            <p class="text-[9px] text-center text-orange-400 mt-4 font-bold italic">Sanksi Progresif: Rp 2.000 per hari</p>
         </div>
 
-        <!-- INFO LEVEL -->
-        <div class="space-y-6">
-            <div class="edu-card p-6 border-l-[10px] border-l-yellow-400">
-                <div class="flex items-start gap-4">
-                    <div class="step-number">1</div>
-                    <div>
-                        <h4 class="font-black text-slate-800 text-lg tracking-tight">Level 1: Telat < 1 Bulan</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed font-medium">Denda bertambah secara <span class="text-orange-600 font-bold">PROGRESIF HARIAN</span> Rp 2.000 setiap harinya.</p>
-                    </div>
+        <!-- SANKSI DETAILS -->
+        <div class="space-y-12">
+            
+            <!-- LVL 1 -->
+            <div class="relative animate__animated animate__fadeInLeft" style="animation-delay: 0.3s;">
+                <div class="absolute -top-6 -left-4 bg-yellow-400 border-4 border-emerald-900 px-6 py-2 rounded-xl font-black text-emerald-900 z-20 shadow-[4px_4px_0px_#064e3b]">
+                    LEVEL 1: INDIVIDUAL
                 </div>
-            </div>
-
-            <div class="edu-card p-6 border-l-[10px] border-l-orange-500">
-                <div class="flex items-start gap-4">
-                    <div class="step-number" style="background: #f97316;">2</div>
-                    <div>
-                        <h4 class="font-black text-slate-800 text-lg tracking-tight">Level 2: Telat > 1 Bulan</h4>
-                        <p class="text-sm text-slate-600 mb-3 font-medium">Bayar akumulasi denda + wajib pilih sanksi kontributif (Konten Branding / Sahabat Diraya).</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="edu-card p-6 border-l-[10px] border-l-red-600 bg-red-50/20">
-                <div class="flex items-start gap-4">
-                    <div class="step-number" style="background: #dc2626;">3</div>
-                    <div>
-                        <h4 class="font-black text-slate-800 text-lg tracking-tight">Sanksi Divisi</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed italic font-medium">
-                            Minimal 2 orang tunggak > 1 bulan = Anggaran Proker Divisi dipotong <span class="font-bold text-red-600">5%</span>.
+                <div class="pop-card p-10 pt-12">
+                    <p class="text-xl font-bold leading-relaxed text-emerald-900">
+                        Berlaku untuk keterlambatan <span class="highlight-yellow">DI BAWAH 1 BULAN</span> (Mulai H+1 Deadline Tanggal 3).
+                    </p>
+                    <div class="mt-6 flex items-center gap-4 bg-emerald-50 p-4 border-2 border-emerald-200 rounded-2xl">
+                        <i class="fas fa-bolt text-3xl text-yellow-500 animate-pulse"></i>
+                        <p class="font-bold text-emerald-800 italic text-sm">
+                            Sistem <span class="underline decoration-emerald-500">PROGRESIF HARIAN</span>: Denda bertambah <span class="text-red-600 font-black">Rp 2.000 SETIAP HARI!</span>
                         </p>
                     </div>
                 </div>
             </div>
+
+            <!-- LVL 2 -->
+            <div class="relative animate__animated animate__fadeInRight" style="animation-delay: 0.5s;">
+                <div class="absolute -top-6 -right-4 bg-orange-500 border-4 border-emerald-900 px-6 py-2 rounded-xl font-black text-white z-20 shadow-[4px_4px_0px_#064e3b]">
+                    LEVEL 2: KRITIS
+                </div>
+                <div class="pop-card p-10 pt-12 border-orange-600">
+                    <p class="text-xl font-bold text-emerald-900 mb-6">
+                        Menunggak <span class="bg-red-600 text-white px-2 rounded">LEBIH DARI 1 BULAN?</span> Selain denda uang, wajib pilih sanksi kontributif:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white border-4 border-emerald-900 p-4 rounded-2xl font-black text-xs flex items-center gap-3">
+                            <i class="fas fa-camera text-orange-500 text-xl"></i> KONTEN BRANDING IPB MENGAJAR
+                        </div>
+                        <div class="bg-white border-4 border-emerald-900 p-4 rounded-2xl font-black text-xs flex items-center gap-3">
+                            <i class="fas fa-search-location text-orange-500 text-xl"></i> CARI SAHABAT DIRAYA (SADIR)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LVL 3 -->
+            <div class="relative animate__animated animate__fadeInUp" style="animation-delay: 0.7s;">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-red-600 border-4 border-emerald-900 px-8 py-2 rounded-xl font-black text-white z-20 shadow-[4px_4px_0px_#064e3b]">
+                    LEVEL 3: DIVISI
+                </div>
+                <div class="pop-card p-10 pt-12 bg-red-600 border-emerald-900 text-white">
+                    <p class="text-center text-xl font-bold leading-relaxed">
+                        Jika <span class="underline decoration-4 text-yellow-300 italic font-black">MINIMAL 2 ORANG</span> se-divisi menunggak > 1 bulan, maka:
+                    </p>
+                    <div class="mt-8 bg-white text-red-600 p-6 rounded-3xl border-4 border-emerald-900 transform rotate-1 shadow-[8px_8px_0px_#064e3b]">
+                        <h4 class="text-3xl font-black text-center">ANGGARAN PROKER DIPOTONG 5%</h4>
+                    </div>
+                    <p class="text-center mt-6 text-xs font-bold italic opacity-80 underline">"Yuk saling ingatkan teman sedivisinya!"</p>
+                </div>
+            </div>
+
         </div>
 
-        <!-- TIPS -->
-        <div class="mt-10 p-8 bg-slate-900 rounded-[40px] text-white shadow-2xl relative overflow-hidden">
-             <i class="fas fa-info-circle absolute -right-5 -bottom-5 text-8xl opacity-10"></i>
-            <h3 class="text-xl font-black mb-4 flex items-center gap-3 italic text-yellow-400">
-                <i class="fas fa-shield-alt"></i> TIPS BEBAS DENDA
-            </h3>
-            <div class="bg-white/10 p-4 rounded-2xl border border-white/10">
-                <p class="font-bold text-sm mb-1 text-green-400 italic">✓ Lapor Sebelum Deadline</p>
-                <p class="text-[11px] text-slate-300 leading-relaxed">Konfirmasi dispensasi ke Bendahara maksimal H-1 Deadline untuk bebas denda.</p>
+        <!-- TIPS PANEL -->
+        <div class="mt-20 pop-card p-10 bg-emerald-900 text-white relative overflow-hidden group">
+            <i class="fas fa-lightbulb absolute -right-4 -bottom-4 text-9xl opacity-10 group-hover:rotate-12 transition-transform duration-500"></i>
+            <h3 class="text-3xl font-bold mb-6 italic text-yellow-400">💡 TIPS BEBAS DENDA:</h3>
+            <div class="space-y-6 font-bold">
+                <div class="bg-emerald-800 p-6 rounded-2xl border-2 border-emerald-700">
+                    <p class="text-lg">Konfirmasi Dispensasi ke Bendahara <span class="bg-emerald-100 text-emerald-900 px-2 rounded">SEBELUM DEADLINE</span> (H-1).</p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1 bg-emerald-500 border-4 border-emerald-900 p-4 rounded-xl text-xs font-black text-center shadow-[4px_4px_0px_#064e3b]">
+                        ✅ LAPOR H-1 = BEBAS DENDA
+                    </div>
+                    <div class="flex-1 bg-red-500 border-4 border-emerald-900 p-4 rounded-xl text-xs font-black text-center shadow-[4px_4px_0px_#064e3b]">
+                        ❌ LAPOR TELAT = DENDA JALAN
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="text-center mt-12 mb-10">
-            <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-[0.4em]">
-                Bendahara Kabinet Arkatara 2026
-            </p>
+        <!-- FOOTER -->
+        <div class="text-center mt-12 pb-20">
+            <p class="text-emerald-800 font-black text-xs uppercase tracking-[0.6em]">Bendahara Arkatara 2026</p>
         </div>
+
     </div>
 
     <script>
-        function calcDenda() {
-            const input = document.getElementById('daysInput');
-            const days = Math.max(0, input.value || 0);
-            const total = days * 2000;
-            document.getElementById('totalDenda').innerText = "Rp " + total.toLocaleString('id-ID');
-            const resCard = document.getElementById('resCard');
-            if(days > 0) {
-                resCard.classList.replace('bg-orange-600', 'bg-red-600');
+        function updateDenda() {
+            const input = document.getElementById('inputHari');
+            const totalDisplay = document.getElementById('totalDenda');
+            const msgStatus = document.getElementById('msgStatus');
+            const hasilBox = document.getElementById('hasilBox');
+            
+            let hari = parseInt(input.value) || 0;
+            let denda = hari * 2000;
+
+            totalDisplay.innerText = "Rp " + denda.toLocaleString('id-ID');
+
+            if(hari > 0) {
+                hasilBox.classList.replace('bg-emerald-900', 'bg-yellow-400');
+                totalDisplay.classList.replace('text-yellow-400', 'text-emerald-900');
+                msgStatus.classList.replace('text-white', 'text-emerald-900');
+                msgStatus.classList.remove('opacity-60');
+                msgStatus.innerText = "🚨 KAMU TELAT " + hari + " HARI! SEGERA LUNASI!";
+                hasilBox.style.transform = "scale(1.05)";
             } else {
-                resCard.classList.replace('bg-red-600', 'bg-orange-600');
+                hasilBox.classList.replace('bg-yellow-400', 'bg-emerald-900');
+                totalDisplay.classList.replace('text-emerald-900', 'text-yellow-400');
+                msgStatus.classList.replace('text-emerald-900', 'text-white');
+                msgStatus.classList.add('opacity-60');
+                msgStatus.innerText = "Masukkan jumlah hari untuk memulai perhitungan";
+                hasilBox.style.transform = "scale(1)";
             }
         }
     </script>
