@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanksi & Denda - Arkatara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fffaf0;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        .edu-card {
+            background: white;
+            border-radius: 32px;
+            border: 2px solid #fde68a;
+            box-shadow: 0 10px 30px -5px rgba(245, 158, 11, 0.1);
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .step-number {
+            background: #f59e0b;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+    <!-- Latar Belakang Dekoratif -->
+    <div class="fixed top-20 left-10 text-yellow-200 floating opacity-40 z-0">
+        <i class="fas fa-pencil-ruler text-6xl"></i>
+    </div>
+    <div class="fixed bottom-20 right-10 text-orange-200 floating opacity-40 z-0" style="animation-delay: 2s;">
+        <i class="fas fa-graduation-cap text-7xl"></i>
+    </div>
+
+    <div class="max-w-2xl mx-auto relative z-10">
+        <!-- HEADER -->
+        <div class="text-center mb-10">
+            <div class="inline-block p-4 bg-orange-100 rounded-3xl mb-4 rotate-3 shadow-lg shadow-orange-100">
+                <i class="fas fa-gavel text-3xl text-orange-600"></i>
+            </div>
+            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Mekanisme Sanksi</h1>
+            <p class="text-orange-600 font-bold text-xs uppercase tracking-[0.2em] mt-3 underline decoration-wavy">Kabinet Arkatara 2026</p>
+        </div>
+
+        <!-- KALKULATOR DENDA -->
+        <div class="edu-card p-8 mb-10 border-orange-300 relative overflow-hidden bg-gradient-to-br from-orange-50 to-white">
+            <div class="text-center mb-6">
+                <h3 class="font-black text-slate-800 text-lg uppercase mb-2 text-orange-600">🧮 Kalkulator Denda Progresif</h3>
+                <p class="text-slate-500 text-xs font-semibold leading-relaxed px-4">
+                    Masukkan berapa hari kamu terlambat dari deadline untuk simulasi total denda yang harus dibayar.
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                <div class="w-full">
+                    <label class="block text-[10px] font-black text-slate-400 mb-2 uppercase tracking-widest text-center md:text-left italic">Berapa hari kamu telat?</label>
+                    <div class="relative">
+                        <input type="number" id="daysInput" min="0" placeholder="Misal: 5" oninput="calcDenda()" 
+                               class="w-full p-5 rounded-2xl border-2 border-orange-200 focus:border-orange-500 outline-none font-black text-2xl text-center text-orange-600 shadow-inner">
+                    </div>
+                </div>
+                
+                <div class="w-full bg-orange-600 p-6 rounded-2xl text-center shadow-xl shadow-orange-200 transition-all duration-300" id="resCard">
+                    <p class="text-[10px] font-black text-orange-100 mb-1 uppercase tracking-widest">Total Denda:</p>
+                    <p class="text-3xl font-black text-white" id="totalDenda">Rp 0</p>
+                </div>
+            </div>
+            <p class="text-[9px] text-center text-orange-400 mt-4 font-bold italic">Sanksi Progresif: Rp 2.000 per hari</p>
+        </div>
+
+        <!-- INFO LEVEL -->
+        <div class="space-y-6">
+            <div class="edu-card p-6 border-l-[10px] border-l-yellow-400">
+                <div class="flex items-start gap-4">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4 class="font-black text-slate-800 text-lg tracking-tight">Level 1: Telat < 1 Bulan</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed font-medium">Denda bertambah secara <span class="text-orange-600 font-bold">PROGRESIF HARIAN</span> Rp 2.000 setiap harinya.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="edu-card p-6 border-l-[10px] border-l-orange-500">
+                <div class="flex items-start gap-4">
+                    <div class="step-number" style="background: #f97316;">2</div>
+                    <div>
+                        <h4 class="font-black text-slate-800 text-lg tracking-tight">Level 2: Telat > 1 Bulan</h4>
+                        <p class="text-sm text-slate-600 mb-3 font-medium">Bayar akumulasi denda + wajib pilih sanksi kontributif (Konten Branding / Sahabat Diraya).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="edu-card p-6 border-l-[10px] border-l-red-600 bg-red-50/20">
+                <div class="flex items-start gap-4">
+                    <div class="step-number" style="background: #dc2626;">3</div>
+                    <div>
+                        <h4 class="font-black text-slate-800 text-lg tracking-tight">Sanksi Divisi</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed italic font-medium">
+                            Minimal 2 orang tunggak > 1 bulan = Anggaran Proker Divisi dipotong <span class="font-bold text-red-600">5%</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIPS -->
+        <div class="mt-10 p-8 bg-slate-900 rounded-[40px] text-white shadow-2xl relative overflow-hidden">
+             <i class="fas fa-info-circle absolute -right-5 -bottom-5 text-8xl opacity-10"></i>
+            <h3 class="text-xl font-black mb-4 flex items-center gap-3 italic text-yellow-400">
+                <i class="fas fa-shield-alt"></i> TIPS BEBAS DENDA
+            </h3>
+            <div class="bg-white/10 p-4 rounded-2xl border border-white/10">
+                <p class="font-bold text-sm mb-1 text-green-400 italic">✓ Lapor Sebelum Deadline</p>
+                <p class="text-[11px] text-slate-300 leading-relaxed">Konfirmasi dispensasi ke Bendahara maksimal H-1 Deadline untuk bebas denda.</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-12 mb-10">
+            <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-[0.4em]">
+                Bendahara Kabinet Arkatara 2026
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function calcDenda() {
+            const input = document.getElementById('daysInput');
+            const days = Math.max(0, input.value || 0);
+            const total = days * 2000;
+            document.getElementById('totalDenda').innerText = "Rp " + total.toLocaleString('id-ID');
+            const resCard = document.getElementById('resCard');
+            if(days > 0) {
+                resCard.classList.replace('bg-orange-600', 'bg-red-600');
+            } else {
+                resCard.classList.replace('bg-red-600', 'bg-orange-600');
+            }
+        }
+    </script>
+</body>
+</html>
