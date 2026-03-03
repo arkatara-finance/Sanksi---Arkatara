@@ -24,9 +24,43 @@
             background-color: var(--soft-blue);
             color: var(--ink);
             overflow-x: hidden;
+            margin: 0;
         }
 
         .font-cartoon { font-family: 'Fredoka One', cursive; }
+
+        /* --- FIXED MARQUEE --- */
+        .marquee-container {
+            background: var(--alert-red);
+            border-bottom: 6px solid var(--ink);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            overflow: hidden; /* Penting agar teks tidak keluar jalur */
+        }
+
+        .marquee-content {
+            display: flex;
+            white-space: nowrap;
+            width: max-content;
+            animation: marquee-animation 30s linear infinite;
+        }
+
+        .marquee-item {
+            display: inline-block;
+            padding-right: 50px; /* Spasi antar pengulangan teks */
+            color: white;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        @keyframes marquee-animation {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Geser setengah panjang konten untuk loop mulus */
+        }
 
         /* Bubble Style */
         .pop-bubble {
@@ -38,55 +72,23 @@
             z-index: 1;
         }
 
-        /* Marquee Custom */
-        .marquee-container {
-            background: var(--alert-red);
-            border-bottom: 6px solid var(--ink);
-            padding: 15px 0;
-            z-index: 100;
-        }
-
-        .marquee-text {
-            color: white;
-            font-weight: 900;
-            font-size: 1.2rem;
-            display: inline-block;
-            white-space: nowrap;
-            animation: marqueeMove 20s linear infinite;
-        }
-
-        @keyframes marqueeMove {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Teacher Animation */
-        .teacher-box {
-            animation: angryTeacher 1.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes angryTeacher {
-            0% { transform: rotate(-5deg) scale(1); }
-            100% { transform: rotate(5deg) scale(1.1); }
-        }
-
-        /* Label Level - Diperbaiki agar tidak tertutup */
+        /* Label Level - Layouting Fix */
         .label-tag {
             position: absolute;
-            top: -25px;
-            left: 20px;
+            top: -20px;
+            left: 30px;
             background: var(--sunny-yellow);
             border: 4px solid var(--ink);
-            padding: 8px 20px;
+            padding: 6px 20px;
             border-radius: 15px;
             font-family: 'Fredoka One', cursive;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--ink);
-            z-index: 10; /* Pastikan di paling atas */
+            z-index: 50;
             box-shadow: 4px 4px 0px var(--ink);
         }
 
-        .label-tag-blue { background: var(--sky-blue); color: white; right: 20px; left: auto; }
+        .label-tag-blue { background: var(--sky-blue); color: white; right: 30px; left: auto; }
         .label-tag-red { background: var(--alert-red); color: white; left: 50%; transform: translateX(-50%); }
 
         .edu-element {
@@ -98,7 +100,7 @@
 
         @keyframes floatUpDown {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-40px); }
+            50% { transform: translateY(-30px); }
         }
 
         .highlight-yellow {
@@ -108,23 +110,34 @@
             border: 2px solid var(--ink);
             font-weight: bold;
         }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 </head>
-<body class="pb-24">
+<body class="pb-20">
 
-    <!-- Marquee Warning -->
-    <div class="marquee-container sticky top-0">
-        <div class="marquee-text font-cartoon tracking-wider">
-            🚨 AWAS KENA SANKSI! 🚨 JANGAN TELAT BAYAR KAS! 🚨 DENDA PROGRESIF SETIAP HARI Rp 2.000 🚨 HUBUNGI BENDAHARA H-1 JIKA ADA KENDALA! 🚨
+    <!-- Marquee Warning (Fixed Loop) -->
+    <div class="marquee-container">
+        <div class="marquee-content font-cartoon">
+            <div class="marquee-item">
+                🚨 AWAS KENA SANKSI! 🚨 JANGAN TELAT BAYAR KAS! 🚨 DENDA PROGRESIF SETIAP HARI Rp 2.000 🚨 HUBUNGI BENDAHARA H-1 JIKA ADA KENDALA! 🚨
+            </div>
+            <!-- Duplikasi teks agar tidak ada celah saat looping -->
+            <div class="marquee-item">
+                🚨 AWAS KENA SANKSI! 🚨 JANGAN TELAT BAYAR KAS! 🚨 DENDA PROGRESIF SETIAP HARI Rp 2.000 🚨 HUBUNGI BENDAHARA H-1 JIKA ADA KENDALA! 🚨
+            </div>
         </div>
     </div>
 
     <!-- Floating Icons -->
-    <div class="edu-element text-7xl text-blue-300 top-20 left-10" style="animation-delay: 0s;"><i class="fas fa-book-reader"></i></div>
-    <div class="edu-element text-8xl text-yellow-300 top-1/2 right-5" style="animation-delay: 1s;"><i class="fas fa-pencil-ruler"></i></div>
-    <div class="edu-element text-6xl text-pink-300 bottom-20 left-15" style="animation-delay: 1.5s;"><i class="fas fa-school"></i></div>
+    <div class="edu-element text-7xl text-blue-200 top-20 left-10" style="animation-delay: 0s;"><i class="fas fa-coins"></i></div>
+    <div class="edu-element text-8xl text-yellow-200 top-1/2 right-10" style="animation-delay: 1s;"><i class="fas fa-calculator"></i></div>
 
-    <div class="max-w-xl mx-auto px-6 mt-12">
+    <div class="max-w-xl mx-auto px-6 mt-16">
 
         <!-- Header -->
         <div class="text-center mb-16 animate__animated animate__jackInTheBox">
@@ -133,13 +146,13 @@
                     ATURAN <span class="text-blue-500">DISIPLIN</span> <br>ARKATARA!
                 </h1>
             </div>
-            <p class="mt-8 font-black text-blue-600 text-sm tracking-widest bold">✨ YUK JADI PENGAJAR YANG TELADAN ✨</p>
+            <p class="mt-8 font-black text-blue-600 text-sm tracking-widest uppercase">✨ Yuk Jadi Pengajar yang Teladan ✨</p>
         </div>
 
         <!-- Kalkulator Denda -->
-        <div class="pop-bubble p-8 mb-24 bg-white border-[6px] border-ink animate__animated animate__zoomIn">
+        <div class="pop-bubble p-8 mb-24 bg-white animate__animated animate__zoomIn">
             <div class="flex items-center gap-4 mb-8">
-                <div class="money-box text-6xl">💰</div>
+                <div class="text-6xl">💰</div>
                 <div>
                     <h2 class="font-cartoon text-xl text-ink">Bendahara Bilang:</h2>
                     <p class="text-sm font-bold text-red-500 italic">"Gak bayar kas? Denda jalan terus!"</p>
@@ -148,8 +161,8 @@
 
             <div class="space-y-6">
                 <div class="bg-blue-50 p-6 rounded-3xl border-4 border-dashed border-sky-400">
-                    <label class="block text-center font-bold text-lg mb-4">Sudah telat berapa hari nih Sobat Arkie?🤔 
-                    <input type="number" id="inputHari" placeholder="Ketik di sini..." oninput="hitungSanksi()"
+                    <label class="block text-center font-bold text-lg mb-4">Sudah telat berapa hari, Arkie? 🤔</label>
+                    <input type="number" id="inputHari" placeholder="0" oninput="hitungSanksi()"
                            class="w-full p-5 text-5xl font-cartoon text-center text-blue-600 bg-white border-4 border-ink rounded-2xl focus:outline-none placeholder-blue-100">
                 </div>
 
@@ -165,73 +178,72 @@
         <div class="space-y-20">
             
             <!-- Level 1 -->
-            <div class="relative animate__animated animate__fadeInLeft">
+            <div class="relative">
                 <div class="label-tag">LEVEL 01: INDIVIDUAL</div>
                 <div class="pop-bubble p-10 pt-14 border-blue-400 shadow-[12px_12px_0px_#00BAFF]">
                     <p class="text-lg font-bold leading-relaxed mb-6">
-                        Berlaku kalau telat <span class="highlight-yellow">DI BAWAH 1 BULAN</span> (Mulai H+1 Deadline).
+                        Berlaku kalau telat <span class="highlight-yellow">DI BAWAH 1 BULAN</span> (H+1 Deadline).
                     </p>
                     <div class="bg-blue-50 border-4 border-ink p-6 rounded-3xl flex items-center gap-5">
-                        <i class="fas fa-coins text-4xl text-yellow-500 animate-bounce"></i>
+                        <i class="fas fa-coins text-4xl text-yellow-500"></i>
                         <div>
-                            <p class="text-xs font-black uppercase text-blue-800">Denda Progresif:</p>
+                            <p class="text-[10px] font-black uppercase text-blue-800">Sanksi:</p>
                             <p class="text-2xl font-cartoon text-red-500">Rp 2.000 / Hari</p>
                         </div>
                     </div>
-                    <p class="text-[10px] mt-4 font-bold text-red-500 italic">🚨 Awas! Denda terus bertambah setiap hari!</p>
                 </div>
             </div>
 
             <!-- Level 2 -->
-            <div class="relative animate__animated animate__fadeInRight">
+            <div class="relative">
                 <div class="label-tag label-tag-blue">LEVEL 02: KRITIS</div>
                 <div class="pop-bubble p-10 pt-14 border-red-500 shadow-[12px_12px_0px_#FF4D4D]">
                     <p class="text-lg font-bold mb-6">
-                        Nunggak <span class="bg-red-500 text-white px-3 rounded-lg border-2 border-ink">LEBIH DARI 1 BULAN</span>? Wajib pilih misi ini:
+                        Nunggak <span class="bg-red-500 text-white px-3 rounded-lg border-2 border-ink">LEBIH DARI 1 BULAN</span>?
                     </p>
                     <div class="space-y-4 font-bold text-sm">
                         <div class="flex items-center gap-4 p-4 bg-white border-4 border-ink rounded-2xl shadow-[4px_4px_0px_#2D3436]">
                             <i class="fas fa-camera-retro text-2xl text-blue-500"></i> Bikin Konten Branding Arkatara
                         </div>
                         <div class="flex items-center gap-4 p-4 bg-white border-4 border-ink rounded-2xl shadow-[4px_4px_0px_#2D3436]">
-                            <i class="fas fa-user-friends text-2xl text-yellow-500"></i> Jadi Perwakilan Divisi Cari Sahabat Diraya (SADIR)
+                            <i class="fas fa-search-dollar text-2xl text-yellow-500"></i> Membantu Pencarian SADIR
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Level 3 -->
-            <div class="relative animate__animated animate__fadeInUp">
+            <div class="relative">
                 <div class="label-tag label-tag-red">LEVEL 03: KELOMPOK</div>
                 <div class="pop-bubble p-10 pt-16 bg-blue-500 border-ink shadow-[12px_12px_0px_#FFD600]">
                     <p class="text-center font-bold text-lg mb-8 text-white">
-                        Kalau <span class="bg-white text-blue-600 px-3 rounded-xl border-2 border-ink">MINIMAL 2 ORANG</span> se-divisi menunggak > 1 bulan, maka:
+                        Kalau <span class="bg-white text-blue-600 px-3 rounded-xl border-2 border-ink">MINIMAL 2 ORANG</span> se-divisi menunggak > 1 bulan:
                     </p>
                     <div class="bg-white text-ink p-8 rounded-[40px] border-[6px] border-ink transform -rotate-2">
                         <h4 class="text-2xl font-cartoon text-center text-red-600 leading-tight">ANGGARAN PROKER <br>DIPOTONG 5% 💸</h4>
                     </div>
-                    <p class="text-center mt-6 text-xs font-bold italic text-blue-100 underline">Saling ingetin temen sedivisinya ya!</p>
+                    <p class="text-center mt-6 text-[10px] font-bold italic text-blue-100 uppercase tracking-widest">Saling ingetin temen sedivisinya ya!</p>
                 </div>
             </div>
 
         </div>
 
         <!-- Tips Panel -->
-        <div class="mt-24 pop-bubble p-8 bg-yellow-100 border-yellow-400 relative overflow-hidden">
+        <div class="mt-24 pop-bubble p-8 bg-yellow-100 border-yellow-400">
             <h3 class="font-cartoon text-lg mb-4 text-ink flex items-center gap-3">
                 <i class="fas fa-magic text-yellow-500"></i> TIPS BEBAS DENDA
             </h3>
             <p class="font-bold text-sm leading-relaxed mb-6">
-                Hubungi Bendahara <span class="bg-white px-2 border-2 border-ink rounded-lg font-black text-blue-600 italic">SEBELUM DEADLINE (H-1)</span> kalau kamu lagi kesulitan bayar!
+                Hubungi Bendahara <span class="bg-white px-2 border-2 border-ink rounded-lg font-black text-blue-600 italic uppercase">H-1 Deadline</span> kalau kamu ada kendala finansial!
             </p>
             <div class="grid grid-cols-2 gap-4">
-                <div class="bg-green-400 border-4 border-ink p-3 rounded-xl font-black text-[10px] text-center text-white shadow-[4px_4px_0px_#2D3436]">LAPOR H-1 = AMAN ✅</div>
+                <div class="bg-green-500 border-4 border-ink p-3 rounded-xl font-black text-[10px] text-center text-white shadow-[4px_4px_0px_#2D3436]">LAPOR H-1 = AMAN ✅</div>
                 <div class="bg-red-500 border-4 border-ink p-3 rounded-xl font-black text-[10px] text-center text-white shadow-[4px_4px_0px_#2D3436]">TELAT LAPOR = DENDA ❌</div>
             </div>
         </div>
 
-        <div class="text-center mt-16 pb-10 opacity-40">
-            <p class="font-black text-[10px] tracking-[0.5em] uppercase">Arkatara 2026</p>
+        <div class="text-center mt-20 opacity-30">
+            <p class="font-black text-[10px] tracking-[0.5em] uppercase">Arkatara Finance 2026</p>
         </div>
 
     </div>
@@ -251,13 +263,11 @@
             if(hari > 0) {
                 box.style.backgroundColor = "var(--alert-red)";
                 total.style.color = "white";
-                pesan.style.color = "white";
                 pesan.innerText = "⚠️ Wah, kamu telat " + hari + " hari! Segera lunasi ya!";
-                box.style.transform = "scale(1.05)";
+                box.style.transform = "scale(1.02)";
             } else {
                 box.style.backgroundColor = "var(--ink)";
                 total.style.color = "var(--sunny-yellow)";
-                pesan.style.color = "white";
                 pesan.innerText = "Ayo masukkan angka keterlambatanmu!";
                 box.style.transform = "scale(1)";
             }
