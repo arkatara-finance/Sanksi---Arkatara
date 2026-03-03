@@ -1,1 +1,1 @@
-# Sanksi---Arkatara
+# Sanksi-Arkatara
